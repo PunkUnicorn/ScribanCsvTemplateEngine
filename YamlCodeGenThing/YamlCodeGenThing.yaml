@@ -1,0 +1,39 @@
+﻿---
+# This file pairs with the examples folder in the solution directory
+input:
+  csv_filename: ..\..\..\Example\input.csv
+template:
+  scriban_filenames:
+    - ..\..\..\Example\Templates\test1.cs
+    - ..\..\..\Example\Templates\test2.cs
+    - ..\..\..\Example\Templates\test3.cs
+    - ..\..\..\Example\Templates\Subfolder\test4.cs
+  base_path: ..\..\..\Example\Templates\
+output:
+  output_path: ..\..\..\Example\Output\
+  csv_column_for_ouput_path_part: name #<-- references the csv header from the input file. Spaces in names are stripped
+data:
+  data_test1: value1
+  data_test2:
+    data_test2_nested1: value2
+    data_test2_nested2: value3
+    data_test2_nested3: value4
+    data_test2_nested4:
+      - value5
+      - value6
+  data_test3:
+    data_test3_nested1: 
+      - data_test3_nested1_1: value7
+        data_test3_nested1_2: value8
+        data_test3_nested1_3: value9
+        data_test3_nested1_4: value10
+      - data_test3_nested1_1: value11
+        data_test3_nested1_2: value12
+        data_test3_nested1_3: value13
+        data_test3_nested1_4: value14
+    data_test3_nested2:
+      data_test3_nested2_1:
+        data_test3_nested2_1_1:
+          data_test3_nested2_1_1_1:
+            data_test3_nested2_1_1_1_1: value16
+...
