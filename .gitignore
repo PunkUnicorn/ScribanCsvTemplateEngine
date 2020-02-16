@@ -32,7 +32,7 @@ bld/
 [Ll]ogs/
 
 # Example output folder
-Example/Output/
+YamlCodeGenThing/Example/Output/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
