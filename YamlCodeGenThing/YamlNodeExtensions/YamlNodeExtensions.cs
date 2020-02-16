@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using SharpYaml.Serialization;
-using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Text;
 
 namespace YamlNodeExtensions
 {
@@ -98,9 +96,6 @@ namespace YamlNodeExtensions
             return v;
         }
 
-        /// <summary>
-        /// Convert from snake_case and/or dash-separated identifiers, to TitleCase, and a bit of other faffery
-        /// </summary>
         private static string DefaultCleanNameFunc(string uncleanNameToBeCleaned)
         {
             var semiClean
@@ -111,30 +106,8 @@ namespace YamlNodeExtensions
 
             if (semiClean.Length == 0) return string.Empty;
 
-            //var cleaned = new StringBuilder();
-            //cleaned.Append(semiClean[semiClean.Length - 1]);
-
-            //var dirtyDirtyIndex = semiClean.Length - 2;
-            //do
-            //{
-            //    var candidate = semiClean[dirtyDirtyIndex];
-            //    if (candidate == '_')
-            //    {
-            //        // ...then make the next character uppercase. Safe because we start with length - 2
-            //        cleaned[cleaned.Length - 1] = char.ToUpper(cleaned[cleaned.Length - 1]);
-            //        continue;
-            //    }
-            //    cleaned.Append(candidate);
-            //}
-            //while (--dirtyDirtyIndex >= 0);
-
-            //var almostFinished = cleaned.ToString().Reverse().ToArray();
-            //var firstCharacter = char.IsNumber(almostFinished[0])
-            //    ? ' '
-            //    : char.ToUpper(almostFinished[0]);
-
             var almostFinished = semiClean;
-            var firstCharacter = char.IsNumber(almostFinished[0])
+            var firstCharacter = char.IsNumber(almostFinished[0]) // Get rid of leading numbers
                 ? ' '
                 : almostFinished[0];
 
