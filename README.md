@@ -17,7 +17,7 @@ The main yaml data variables are added to the template model in addition to the 
 These are added in the yaml file passed into the program when it starts, in the 'data:' section, e.g.:
 
 
-#Example program yaml
+```#Example program yaml
 input:
   csv_filename: .\Example\input.csv
 template:
@@ -45,7 +45,7 @@ data:
            fav_colour: blue
          - name: alf
            age: 70
-           fav_colour: red
+           fav_colour: red```
     
 
 
