@@ -1,21 +1,27 @@
-# YamlGodeGenThing
-### YamlCodeGenThing - text (code) templating from csv file input ...featuring Scriban!
+# ScribanCsvTemplateEngine
+### ScribanCsvTemplateEngine - text (code) templating from csv file input ...featuring Scriban!
+_previously YamlCodeGenThing_
+
+1) Take a corpus of templated text files, using {{ }} for variable placement (Scriban style) for values to be exchanged.
+
+2) Take a csv file, with the first row being csv headers to give the columns names, and then these names can be referenced in the template corpus as exchange variables, e.g: 
+  ```"age,  name,   origin_story,
+  27, John, Blah blah,
+  32, Jill, Etc etc"```
+And in the template file:
+  ```"Their age is {{age}}, and their name is {{name}.
+  {{origin_story}}"```
+      
+
+3) This command line utility then creates a copy of all the templates for each row of the csv file, exchanging the values using Scriban.
 
 
-1) Take a corpus of templated text files, with literal content intersperced with Scriban style template values to be exchanged, like {{variable_name}} or {{complex_obj.nested_property}} etc.
+In addition to csv data variables, data variables can also be added globally. These are put in the yaml file, and add to the model for each csv row.
+The global data lives in the 'data:' section of the yaml (see below)
 
-2) Take a csv file, with the first row being csv headers to give the column values in the row names, and then these names can be referenced in the template corpus as exchange variables (see above). 
+These yaml data variables are added to the csv model for each row. Note that data items in the csv file will override data items in the global yaml data, if they share the same name. 
 
-3) This utility then creates a copy of the template corpus for each row of the csv file, exchanging the values from the csv file.
-
-
-In addition to csv data variables, data variables can be added globally, which are add to the model for all the templates. 
-The global data, to be applied to all templates, lives in the main applications yaml file, in the 'data:' section (see below)
-
-The main yaml data variables are added to the template model in addition to the csv row. Note that data items in the csv file will override data items in the global yaml data, if they share the same name. 
-
-These are added in the yaml file passed into the program when it starts, in the 'data:' section, e.g.:
-
+Here is an example 'data:' section in the main yaml:
 
 ```#Example program yaml
 input:
@@ -48,6 +54,13 @@ data:
            fav_colour: red```
     
 
+Then you can reference this data using Scriban notation: 
+
+  `<html><body>{{for item in which_means_you_can_make_lists}}`
+  
+Or
+
+  `Mary had a little {{add_your_extra_data_items_here_which_are_accessable_by_all_template_files.using_standard_yaml}}`
 
 Template file data overrides:
 Data items can also be added for each template file. This is done by adding a .yaml file of the same name as the template file, except changing the extension to be 'yaml' instead of what it was originally, and putting this yaml file in the same folder as the template file of the same name. You do not need a 'data:' section for these template override yaml files, as the whole yaml is added as the model. 
