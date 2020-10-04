@@ -5,12 +5,14 @@ _previously YamlCodeGenThing_
 1) Take a corpus of templated text files, using {{ }} for variable placement (Scriban style) for values to be exchanged.
 
 2) Take a csv file, with the first row being csv headers to give the columns names, and then these names can be referenced in the template corpus as exchange variables, e.g: 
-  ```"age,  name,   origin_story,
+```
+  "age,  name,   origin_story,
   27, John, Blah blah,
   32, Jill, Etc etc"
 ```
 And in the template file:
-  ```"Their age is {{age}}, and their name is {{name}.
+```
+  "Their age is {{age}}, and their name is {{name}.
   {{origin_story}}"
 ```     
 3) This command line utility then creates a copy of all the templates for each row of the csv file, exchanging the values using Scriban.
