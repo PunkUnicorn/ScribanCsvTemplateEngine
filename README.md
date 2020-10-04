@@ -70,6 +70,10 @@ Data items can also be added for each template file. This is done by adding a .y
 
 Order of precedence, amongst the different data source, for data members name clashes is:
 
-1st - Csv data items   (if the value is blank, it is ignored and precedence given to 2nd and 3rd order precedence, even if 2nd and 3rd are blank. Only blank csv data items give way to lesser
-2nd - template file yaml
-3rd - ScribanCsvTemplateEngine.yaml 'data:'
+1st - Csv data items   (if the value is blank, it is ignored and the value is taken from the next in order of precedence. Only blank csv data items give way to lesser presidence.
+2nd - ScribanCsvTemplateEngine.yaml 'data:'
+3rd - template file yaml data
+
+That is, main program yaml 'data:' items will override the template level yaml.
+
+And csv data will override all others.

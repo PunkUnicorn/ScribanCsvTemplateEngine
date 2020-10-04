@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using YamlNodeExtensions;
 
-namespace YamlCodeGenThing
+namespace ScribanCsvTemplateEngine
 {
     public static class Program
     {
@@ -42,7 +42,6 @@ namespace YamlCodeGenThing
 
             FixPaths(config);
 
-
             /*                            *\
 
                   ██████╗  ██████╗ ██╗
@@ -53,10 +52,9 @@ namespace YamlCodeGenThing
                   ╚═════╝  ╚═════╝ ╚═╝  
             \*                            */
 
-
             try
             {
-                Console.WriteLine("YamlCodeGenThing, featuring Scriban!\n\nLoaded configuration is...");
+                Console.WriteLine($"{nameof(ScribanCsvTemplateEngine)}, featuring Scriban!\n\nLoaded configuration is...");
                 Console.WriteLine(JsonConvert.SerializeObject(config, Formatting.Indented));
                 Console.WriteLine("...now working, please wait...\n\n");
                 ThunderbirdsAreGo(config, inputRows, templateDict);
@@ -71,7 +69,7 @@ namespace YamlCodeGenThing
             return 0;
         }
 
-        private static void ThunderbirdsAreGo(YamlGlobalConfiguration config, (string[], IEnumerable<string[]>) inputRows, Dictionary<string, Scriban.Template> templateDict)
+        public static void ThunderbirdsAreGo(YamlGlobalConfiguration config, (string[], IEnumerable<string[]>) inputRows, Dictionary<string, Scriban.Template> templateDict)
         {
             foreach (var templateFilename in config.template.scriban_filenames)
             { 
@@ -134,23 +132,24 @@ namespace YamlCodeGenThing
                     }
                     catch (Exception e) { Console.Error.WriteLine(e.ToString()); }
 
-            /* input csv row level yaml 2nd (second order of presidence) */
+
+            /* global yaml 2nd (second in the order of presidence) */
+            foreach (var yamlModelItem in (globalData as IDictionary<string, object>))
+                if (!model.TryAdd(yamlModelItem.Key, yamlModelItem.Value))
+                    try
+                    {
+                        Console.WriteLine($"possibly a duplicate key: {nameof(yamlModelItem)}.{nameof(yamlModelItem.Key)}={yamlModelItem.Key}");
+                        continue;
+                    }
+                    catch (Exception e) { Console.Error.WriteLine(e.ToString()); }
+
+            /* input csv row level yaml 3rd (third order of presidence) */
             var index = 0;
             foreach (var inputModelItem in inputRow)
                 if (!model.TryAdd(inputHeaders[index++], inputModelItem))
                     try
                     {
                         Console.WriteLine($"possibly a duplicate key: {inputHeaders[index - 1]}={inputModelItem}");
-                        continue;
-                    }
-                    catch (Exception e) { Console.Error.WriteLine(e.ToString()); }
-
-            /* global yaml 3rd (third in the order of presidence) */
-            foreach (var yamlModelItem in (globalData as IDictionary<string, object>))
-                if (!model.TryAdd(yamlModelItem.Key, yamlModelItem.Value))
-                    try
-                    {
-                        Console.WriteLine($"possibly a duplicate key: {nameof(yamlModelItem)}.{nameof(yamlModelItem.Key)}={yamlModelItem.Key}");
                         continue;
                     }
                     catch (Exception e) { Console.Error.WriteLine(e.ToString()); }

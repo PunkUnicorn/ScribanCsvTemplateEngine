@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
 
-namespace YamlCodeGenThing
+namespace ScribanCsvTemplateEngine
 {
-    using static YamlCodeGenThing.YamlGlobalConfigurationSections;
+    using static ScribanCsvTemplateEngine.YamlGlobalConfigurationSections;
 
     public static class YamlGlobalConfigurationSections
     {

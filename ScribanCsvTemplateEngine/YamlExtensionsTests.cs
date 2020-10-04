@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using YamlNodeExtensions;
 
-namespace yamlCodeGenThing
+namespace ScribanCsvTemplateEngine
 {
     class YamlExtensionsTests
     {
