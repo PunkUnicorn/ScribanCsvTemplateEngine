@@ -2,7 +2,7 @@
 ### ScribanCsvTemplateEngine - text (code) templating from csv file input ...featuring Scriban!
 _previously YamlCodeGenThing_
 
-1) Take a corpus of templated text files, using {{ }} for variable placement (Scriban style) for values to be exchanged.
+1) Take a bunch of template text files, using {{ }} for variable placement (Scriban style) for values to be exchanged.
 
 2) Take a csv file, with the first row being csv headers to give the columns names, and then these names can be referenced in the template corpus as exchange variables, e.g: 
 ```
@@ -15,7 +15,7 @@ And in the template file:
   "Their age is {{age}}, and their name is {{name}.
   {{origin_story}}"
 ```     
-3) This command line utility then creates a copy of all the templates for each row of the csv file, exchanging the values using Scriban.
+3) This command line utility then creates a _*copy of each* of the template files for each row in the csv file_, exchanging the values using Scriban.
 
 
 In addition to csv data variables, data variables can also be added globally. These are put in the yaml file, and add to the model for each csv row.
@@ -54,16 +54,18 @@ data:
          - name: alf
            age: 70
            fav_colour: red
+  more_data:
+    and_more: A Little Lamb
 ```
     
 
-Then you can reference this data using Scriban notation: 
+Then you can reference this data in the template files, using Scriban notation: 
 
   `<html><body>{{for item in which_means_you_can_make_lists}}`
   
 Or
 
-  `Mary had a little {{add_your_extra_data_items_here_which_are_accessable_by_all_template_files.using_standard_yaml}}`
+  `Mary had a little {{more_data.and_more}}`
 
 Template file data overrides:
 Data items can also be added for each template file. This is done by adding a .yaml file of the same name as the template file, except changing the extension to be 'yaml' instead of what it was originally, and putting this yaml file in the same folder as the template file of the same name. You do not need a 'data:' section for these template override yaml files, as the whole yaml is added as the model. 
