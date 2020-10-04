@@ -2,7 +2,7 @@
 ### ScribanCsvTemplateEngine - text (code) templating from csv file input ...featuring Scriban!
 _previously YamlCodeGenThing_
 
-1) Take a corpus of templated text files, using {{ }} for variable placement (Scriban style) for values to be exchanged.
+1) Take a bunch of template text files, using {{ }} for variable placement (Scriban style) for values to be exchanged.
 
 2) Take a csv file, with the first row being csv headers to give the columns names, and then these names can be referenced in the template corpus as exchange variables, e.g: 
 ```
@@ -15,7 +15,7 @@ And in the template file:
   "Their age is {{age}}, and their name is {{name}.
   {{origin_story}}"
 ```     
-3) This command line utility then creates a copy of all the templates for each row of the csv file, exchanging the values using Scriban.
+3) This command line utility then creates a _*copy of each* of the template files for each row in the csv file_, exchanging the values using Scriban.
 
 
 In addition to csv data variables, data variables can also be added globally. These are put in the yaml file, and add to the model for each csv row.
