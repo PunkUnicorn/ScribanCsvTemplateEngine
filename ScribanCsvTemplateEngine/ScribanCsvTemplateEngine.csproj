@@ -24,6 +24,9 @@
     <None Update="Example\input.csv">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Update="ScribanCsvTemplateEngine.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="YamlCodeGenThing.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
