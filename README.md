@@ -23,7 +23,7 @@ The global data lives in the 'data:' section of the yaml (see below)
 
 These yaml data variables are added to the csv model for each row. Note that data items in the csv file will override data items in the global yaml data, if they share the same name. 
 
-Here is an example 'data:' section in the main yaml:
+Here is an example yaml file. The free form values are directly under the 'data:' section:
 
 ```#Example program yaml
 input:
@@ -65,7 +65,7 @@ Then you can reference this data in the template files, using Scriban notation:
   
 Or
 
-  `Mary had a little {{more_data.and_more}}`
+  `Mary had {{more_data.and_more}}`
 
 Template file data overrides:
 Data items can also be added for each template file. This is done by adding a .yaml file of the same name as the template file, except changing the extension to be 'yaml' instead of what it was originally, and putting this yaml file in the same folder as the template file of the same name. You do not need a 'data:' section for these template override yaml files, as the whole yaml is added as the model. 
